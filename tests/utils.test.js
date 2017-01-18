@@ -23,12 +23,42 @@ describe('Utils.js', () => {
       });
     });
   });
+  describe('makePassword', () => {
+    it('should correctly make a password', () => {
+      const bitset = new Array(144).fill(false);
+      expect(Utils.makePassword(bitset)).toEqual('000000000000000000000000');
+    });
+  });
   describe('numberToBitset', () => {
     it('should convert 0 to [false]', () => {
       expect(Utils.numberToBitset(0)).toEqual([false]);
     });
     it('should convert 1 to [true]', () => {
       expect(Utils.numberToBitset(1)).toEqual([true]);
+    });
+    it('should convert 11 to [true, false, true, true]', () => {
+      expect(Utils.numberToBitset(11)).toEqual([true, false, true, true]);
+    });
+    it('should convert 125 to [true, true, true, true, true, false, true]', () => {
+      expect(Utils.numberToBitset(125)).toEqual([true, true, true, true, true, false, true]);
+    });
+  });
+  describe('translateBitset', () => {
+    it('should translate an empty bitset', () => {
+      const bitset = new Array(144).fill(false);
+      expect(Utils.translateBitset(bitset)).toEqual('000000000000000000000000');
+    });
+  });
+  describe('splitPassword', () => {
+    it('should split the password into 4 sections of size 6', () => {
+      const password = '000000000000000000000000';
+      const expected = [
+        '000000',
+        '000000',
+        '000000',
+        '000000',
+      ];
+      expect(Utils.splitPassword(password)).toEqual(expected);
     });
   });
 });

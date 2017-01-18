@@ -1,16 +1,20 @@
 import React from 'react';
+import PasswordDisplay from './PasswordDisplay.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bitset: new Array(144).fill(false)
+      gameData: new Array(136).fill(false),
     };
   }
   render() {
     return (
       <div>
-        <h2>Metroid Password Generator</h2>
+        <h1>Metroid Password Generator</h1>
+        <PasswordDisplay
+          gameData={this.state.gameData.slice()}
+        />
       </div>
     );
   }
