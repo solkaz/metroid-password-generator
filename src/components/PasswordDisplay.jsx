@@ -1,16 +1,15 @@
 import React, { PropTypes } from 'react';
 import { makePasswordSections } from '../utils.js';
+import PasswordDisplaySection from './PasswordDisplaySection.jsx';
 
 const PasswordDisplay = ({gameData}) => {
   const passwordSections = makePasswordSections(gameData);
   const displaySections = passwordSections.map((section, index) => {
     return (
-      <div key={index}>
-        <span>
-          {section}
-        </span>
-        <br />
-      </div>
+      <PasswordDisplaySection
+        key={index}
+        section={section}
+      />
     );
   });
   return (
