@@ -61,4 +61,15 @@ describe('Utils.js', () => {
       expect(Utils.splitPassword(password)).toEqual(expected);
     });
   });
+  describe('flipBit', () => {
+    it('flips a bit', () => {
+      const bitset = [false, false, false, false];
+      const expected = [true, false, false, false];
+      expect(Utils.flipBit(bitset, 0)).toEqual(expected);
+    });
+    it('flipping the same bit twice should result in no changed state', () => {
+      const bitset = [false, false, false, false];
+      expect(Utils.flipBit(Utils.flipBit(bitset, 0), 0)).toEqual(bitset);
+    });
+  });
 });

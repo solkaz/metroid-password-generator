@@ -76,7 +76,8 @@ export const translateBitset = (bitset) => {
   let password = '';
   // Each character is translated from a 6-bit byt
   const byteLength = 6;
-  for (let byteNum = 0; byteNum < 24; byteNum++) {
+  const numOfBytes = 24;
+  for (let byteNum = 0; byteNum < numOfBytes; byteNum++) {
     password += translateByte(bitset.slice(byteLength * byteNum, byteLength * (byteNum + 1)));
   }
   return password;
@@ -96,6 +97,13 @@ export const splitPassword = (password) => {
     password.slice(12, 18),
     password.slice(18),
   ];
+};
+
+export const flipBit = (bitset, index) => {
+  // This should not mutate the bitset that was passed in; make a copy of it
+  const bitsetCopy = bitset.slice();
+  bitsetCopy[index] = !(bitsetCopy[index]);
+  return bitsetCopy;
 };
 
 export default { bitsetToNumber, numberToBitset };
