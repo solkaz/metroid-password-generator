@@ -1,5 +1,7 @@
-import React from 'react';
 import PasswordDisplay from './PasswordDisplay.jsx';
+import React from 'react';
+import { flipBit } from '../utils.js';
+import DataModifiers from './DataModifiers.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -7,6 +9,20 @@ class App extends React.Component {
     this.state = {
       gameData: new Array(136).fill(false),
     };
+    this.toggleBitFactory = this.toggleBitFactory.bind(this);
+    this.toggleBit = this.toggleBit.bind(this);
+  }
+  toggleBitFactory(bitIndex) {
+    return () => {
+      this.toggleBit(bitIndex);
+    };
+  }
+
+  toggleBit(bitIndex) {
+    const gameData = this.state.gameData;
+    this.setState({
+      gameData: flipBit(gameData, bitIndex),
+    });
   }
   render() {
     return (
@@ -15,6 +31,9 @@ class App extends React.Component {
         <PasswordDisplay
           gameData={this.state.gameData.slice()}
         />
+      <DataModifiers
+        toggleCallback={this.toggleBitFactory}
+      />
       </div>
     );
   }
