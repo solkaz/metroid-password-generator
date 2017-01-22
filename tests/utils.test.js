@@ -23,12 +23,6 @@ describe('Utils.js', () => {
       });
     });
   });
-  describe('makePassword', () => {
-    it('should correctly make a password', () => {
-      const bitset = new Array(144).fill(false);
-      expect(Utils.makePassword(bitset)).toEqual('000000000000000000000000');
-    });
-  });
   describe('numberToBitset', () => {
     it('should convert 0 to [false]', () => {
       expect(Utils.numberToBitset(0)).toEqual([false]);
@@ -41,6 +35,12 @@ describe('Utils.js', () => {
     });
     it('should convert 125 to [true, true, true, true, true, false, true]', () => {
       expect(Utils.numberToBitset(125)).toEqual([true, true, true, true, true, false, true]);
+    });
+  });
+  describe('makePassword', () => {
+    it('should correctly make a password', () => {
+      const bitset = new Array(144).fill(false);
+      expect(Utils.makePassword(bitset)).toEqual('000000000000000000000000');
     });
   });
   describe('translateBitset', () => {

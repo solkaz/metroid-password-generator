@@ -9,16 +9,20 @@ class OptionToggler extends React.Component {
   }
   render() {
     return (
-      <button onClick={this.props.toggleCallback}>
-        {this.props.title}
-      </button>
+      <div>
+        <button onClick={this.props.toggleCallback}>
+          {this.props.title} - { String(this.props.value) }
+        </button>
+        <br />
+      </div>
     );
   }
 }
 
- OptionToggler.propTypes = {
+OptionToggler.propTypes = {
   title: React.PropTypes.string.isRequired,
-  toggleCallback: React.PropTypes.isRequired,
+  toggleCallback: React.PropTypes.func.isRequired,
+  value: React.PropTypes.bool.isRequired
 };
 
 export default OptionToggler;

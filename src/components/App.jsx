@@ -32,6 +32,7 @@ class App extends React.Component {
           gameData={this.state.gameData.slice()}
         />
       <DataModifiers
+        gameData={this.state.gameData.slice()}
         toggleCallback={this.toggleBitFactory}
       />
       </div>
