@@ -106,4 +106,17 @@ export const flipBit = (bitset, index) => {
   return bitsetCopy;
 };
 
+export const spliceBitset = (bitset, start, newBitset) => {
+  const bitsetCopy = bitset.slice();
+  bitsetCopy.splice(start, newBitset.length, ...newBitset);
+  return bitsetCopy;
+};
+
+export const padBitsetLeft = (bitset, length) => {
+  if (bitset.length === length) {
+    return bitset;
+  }
+  return (Array(length - bitset.length).fill(false)).concat(bitset);
+};
+
 export default { bitsetToNumber, numberToBitset };

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import OptionToggler from './OptionToggler.jsx';
+import Missiles from './Missiles.jsx';
 
 const optionsList = [
   { title: 'Metroid Ball Taken', bitIndex: 0 },
@@ -33,6 +34,9 @@ class DataModifiers extends React.Component {
     });
     return (
       <div>
+        <Missiles
+          saveMissileCount={this.props.spliceCallback(80)}
+        />
         { optionsToggler }
       </div>
     );
@@ -40,8 +44,9 @@ class DataModifiers extends React.Component {
 }
 
 DataModifiers.propTypes = {
-  title: React.PropTypes.string,
-  toggleCallback: React.PropTypes.func,
+  gameData: PropTypes.arrayOf(PropTypes.bool).isRequired,
+  spliceCallback: PropTypes.func.isRequired,
+  toggleCallback: PropTypes.func.isRequired,
 };
 
  export default DataModifiers;

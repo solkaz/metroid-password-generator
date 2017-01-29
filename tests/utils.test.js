@@ -30,6 +30,9 @@ describe('Utils.js', () => {
     it('should convert 1 to [true]', () => {
       expect(Utils.numberToBitset(1)).toEqual([true]);
     });
+    it('should convert 2 to [ true, false]', () => {
+      expect(Utils.numberToBitset(2)).toEqual([true, false]);
+    });
     it('should convert 11 to [true, false, true, true]', () => {
       expect(Utils.numberToBitset(11)).toEqual([true, false, true, true]);
     });
@@ -70,6 +73,14 @@ describe('Utils.js', () => {
     it('flipping the same bit twice should result in no changed state', () => {
       const bitset = [false, false, false, false];
       expect(Utils.flipBit(Utils.flipBit(bitset, 0), 0)).toEqual(bitset);
+    });
+  });
+  describe('spliceBitset', () => {
+    it('should set splice the bitset and replace the deleted elements', () => {
+      const zeroBitset = [false, false, false, false];
+      const toAdd = [true, true];
+      const received = Utils.spliceBitset(zeroBitset, 1, toAdd);
+      expect(received).toEqual([false, true, true, false]);
     });
   });
 });

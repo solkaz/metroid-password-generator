@@ -20,7 +20,7 @@ const PasswordDisplay = ({gameData}) => {
 };
 
 PasswordDisplay.propTypes = {
-  gameData: PropTypes.arrayOf(PropTypes.bool),
+  gameData: PropTypes.arrayOf(PropTypes.bool).isRequired,
 };
 
 export default PasswordDisplay;
