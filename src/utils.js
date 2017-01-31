@@ -119,4 +119,9 @@ export const padBitsetLeft = (bitset, length) => {
   return (Array(length - bitset.length).fill(false)).concat(bitset);
 };
 
+// http://stackoverflow.com/a/1830844
+export const isNumeric = (n) => {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
 export default { bitsetToNumber, numberToBitset };
