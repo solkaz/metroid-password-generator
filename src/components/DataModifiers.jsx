@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import OptionToggler from './OptionToggler.jsx';
+import GameTime from './GameTime.jsx';
 import Missiles from './Missiles.jsx';
 
 const optionsList = [
@@ -36,6 +37,9 @@ class DataModifiers extends React.Component {
       <div>
         <Missiles
           saveMissileCount={this.props.spliceCallback(80)}
+        />
+        <GameTime
+          saveGameTime={this.props.spliceCallback(88)}
         />
         { optionsToggler }
       </div>
