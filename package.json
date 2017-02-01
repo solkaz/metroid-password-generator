@@ -1,6 +1,10 @@
 {
   "name": "mpg",
   "version": "0.1.0",
+  "engines": {
+    "node": "7.5.0",
+    "npm": "4.1.2"
+  },
   "private": true,
   "devDependencies": {
     "eslint": "^3.13.0",
