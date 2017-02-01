@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import OptionToggler from './OptionToggler.jsx';
 import GameTime from './GameTime.jsx';
 import Missiles from './Missiles.jsx';
+import StartLocation from './StartLocation.jsx';
 
 const optionsList = [
   { title: 'Metroid Ball Taken', bitIndex: 0 },
@@ -35,6 +36,9 @@ class DataModifiers extends React.Component {
     });
     return (
       <div>
+        <StartLocation
+          saveStartLocation={this.props.spliceCallback(64)}
+        />
         <Missiles
           saveMissileCount={this.props.spliceCallback(80)}
         />
