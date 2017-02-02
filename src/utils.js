@@ -18,15 +18,10 @@ export const bitsetToNumber = (bitset) => {
   return sum;
 };
 
-export const makePasswordSections = (bitset) => {
-  const password = makePassword(bitset);
-  return splitPassword(password);
-};
-
-export const makePassword = (gameData) => {
-  const checksumBitset = makeChecksumByte(gameData);
-  const shiftedPassword = shiftPassword(gameData.slice());
-  return translateBitset(shiftedPassword.concat(checksumBitset));
+const calculateChecksum = (bitset) => {
+  return (bitset.reduce((sum, bit) => {
+    return sum + Number(bit);
+  }, 0) & 255);
 };
 
 const makeChecksumByte = (gameData) => {
@@ -39,12 +34,6 @@ const makeChecksumByte = (gameData) => {
     checksumBitset.unshift(false);
   }
   return checksumBitset;
-};
-
-const calculateChecksum = (bitset) => {
-  return (bitset.reduce((sum, bit) => {
-    return sum + Number(bit);
-  }, 0) & 255);
 };
 
 const shiftPassword = (bitset) => {
@@ -72,6 +61,13 @@ const shiftPassword = (bitset) => {
   return bitset.concat(shiftByte);
 };
 
+const translateByte = (byte) => {
+  // Take the numeric value of the byte passed in
+  const value = bitsetToNumber(byte);
+  // Return the char at the index of value
+  return alphabet[value];
+};
+
 export const translateBitset = (bitset) => {
   let password = '';
   // Each character is translated from a 6-bit byt
@@ -83,11 +79,10 @@ export const translateBitset = (bitset) => {
   return password;
 };
 
-const translateByte = (byte) => {
-  // Take the numeric value of the byte passed in
-  const value = bitsetToNumber(byte);
-  // Return the char at the index of value
-  return alphabet[value];
+export const makePassword = (gameData) => {
+  const checksumBitset = makeChecksumByte(gameData);
+  const shiftedPassword = shiftPassword(gameData.slice());
+  return translateBitset(shiftedPassword.concat(checksumBitset));
 };
 
 export const splitPassword = (password) => {
@@ -97,6 +92,11 @@ export const splitPassword = (password) => {
     password.slice(12, 18),
     password.slice(18),
   ];
+};
+
+export const makePasswordSections = (bitset) => {
+  const password = makePassword(bitset);
+  return splitPassword(password);
 };
 
 export const flipBit = (bitset, index) => {

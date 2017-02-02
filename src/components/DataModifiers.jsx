@@ -20,9 +20,6 @@ const optionsList = [
 ];
 
 class DataModifiers extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const optionsToggler = optionsList.map((option, index) => {
       return (
