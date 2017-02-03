@@ -4,7 +4,7 @@ class StartLocation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: '',
+      location: 'Brinstar',
     };
     this.onChange = this.onChange.bind(this);
   }
