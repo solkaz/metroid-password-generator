@@ -1,99 +1,111 @@
 import React, { PropTypes } from 'react';
 
-class StartLocation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      location: 'Brinstar',
-    };
-    this.onChange = this.onChange.bind(this);
+import { bitsetToNumber } from '../utils.js';
+
+const locationBitsets = {
+  'Brinstar': [ false, false, false, false ],
+  'Norfair': [ true, false, false, false ],
+  'KraidsLair': [ false, true, false, false ],
+  'Tourian': [ true, true, false, false ],
+  'RidleysLair': [ false, false, true, false ],
+};
+
+const getLocationBitset = (location) => {
+  if (locationBitsets[location]) {
+    return locationBitsets[location];
   }
-  onChange(ev) {
+  return locationBitsets['Brinstar'];
+};
+
+const translateLocationBitset = (locationBitset) => {
+  const bitsetValue = bitsetToNumber(locationBitset);
+  switch (bitsetValue) {
+    default:
+    case 0: {
+      return 'Brinstar';
+    }
+    case 1: {
+      return 'Norfair';
+    }
+    case 2: {
+      return 'KraidsLair';
+    }
+    case 3: {
+      return 'Tourian';
+    }
+    case 4: {
+      return 'RidleysLair';
+    }
+  }
+}
+
+const StartLocation = ({ locationBitset, saveStartLocation }) => {
+  const onChange = (ev) => {
     const location = ev.target.value;
-    this.setState({
-      location
-    });
     /*
      * Samus' starting location is determined by bits 64-67, so with
      * 4 bits, there are theoretically 16 possible combinations. However,
      * There are five valid locations, which are turned on with the specified
      * bitset combinations:
-     * Brinstar: [false, false, false, false]
-     * Norfair: [true, false, false, false]
-     * Kraid's Lair: [false, true, false, false]
-     * Ridley's Lair: [false, false, true, false]
-     * Tourian: [true, true, false, false]
+     * Brinstar:      [ false, false, false, false]
+     * Norfair:       [ true,  false, false, false]
+     * Kraid's Lair:  [ false, true,  false, false]
+     * Tourian:       [ true,  true,  false, false]
+     * Ridley's Lair: [ false, false, true,  false]
      * Note that bit 67 is never turned on above; this is because it is considered
      * a 'reset' bit; any password that has it turned on will be considered
      * 'invalid' and cause Metroid to reset
      */
 
-    let newLocationBitset;
-    switch (location) {
-    default: {
-      newLocationBitset = [false, false, false, false];
-      break;
-    }
-    case 'Norfair': {
-      newLocationBitset = [true, false, false, false];
-      break;
-    }
-    case 'KraidsLair': {
-      newLocationBitset = [false, true, false, false];
-      break;
-    }
-    case 'RidleysLair': {
-      newLocationBitset = [false, false, true, false];
-      break;
-    }
-    case 'Tourian': {
-      newLocationBitset = [true, true, false, false];
-      break;
-    }
-    }
-    this.props.saveStartLocation(newLocationBitset);
-  }
+    const newLocationBitset = getLocationBitset(location);
+    saveStartLocation(newLocationBitset);
+  };
 
-  render() {
-    const location = this.state.location;
-    return (
-      <div onChange={this.onChange}>
-        <input
-          type="radio"
-          name="startLocation"
-          checked={location === 'Brinstar'}
-          value="Brinstar"
-        />Brinstar
-        <input
-          type="radio"
-          name="startLocation"
-          checked={location === 'Norfair'}
-          value="Norfair"
-        />Norfair
-        <input
-          type="radio"
-          name="startLocation"
-          checked={location === 'KraidsLair'}
-          value="KraidsLair"
-        />Kraid's Lair
-        <input
-          type="radio"
-          name="startLocation"
-          checked={location === 'RidleysLair'}
-          value="RidleysLair"
-        />Ridley's Lair
-        <input
-          type="radio"
-          name="startLocation"
-          checked={location === 'Tourian'}
-          value="Tourian"
-        />Tourian
-      </div>
-    );
-  }
-}
+  const location = translateLocationBitset(locationBitset);
+
+  return (
+    <div>
+      <input
+        type="radio"
+        name="startLocation"
+        checked={location === 'Brinstar'}
+        onChange={onChange}
+        value="Brinstar"
+      />Brinstar
+      <input
+        type="radio"
+        name="startLocation"
+        checked={location === 'Norfair'}
+        onChange={onChange}
+        value="Norfair"
+      />Norfair
+      <input
+        type="radio"
+        name="startLocation"
+        checked={location === 'KraidsLair'}
+        onChange={onChange}
+        value="KraidsLair"
+      />Kraid's Lair
+      <input
+        type="radio"
+        name="startLocation"
+        checked={location === 'Tourian'}
+        onChange={onChange}
+        value="Tourian"
+      />Tourian
+      <input
+        type="radio"
+        name="startLocation"
+        checked={location === 'RidleysLair'}
+        onChange={onChange}
+        value="RidleysLair"
+      />Ridley's Lair
+    </div>
+  );
+};
 
 StartLocation.propTypes = {
+  locationBitset: PropTypes.arrayOf(PropTypes.bool).isRequired,
   saveStartLocation: PropTypes.func.isRequired,
 };
 

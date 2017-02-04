@@ -35,6 +35,7 @@ class DataModifiers extends React.Component {
     return (
       <div>
         <StartLocation
+          locationBitset={(this.props.gameData).slice(64, 68)}
           saveStartLocation={this.props.spliceCallback(64)}
         />
         <Missiles
