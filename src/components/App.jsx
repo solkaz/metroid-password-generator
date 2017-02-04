@@ -1,7 +1,10 @@
-import PasswordDisplay from './PasswordDisplay.jsx';
 import React from 'react';
-import { flipBit, spliceBitset } from '../utils.js';
+
 import DataModifiers from './DataModifiers.jsx';
+import PasswordDisplay from './PasswordDisplay.jsx';
+import ResetButton from './ResetButton.jsx';
+
+import { flipBit, spliceBitset } from '../utils.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,17 +12,15 @@ class App extends React.Component {
     this.state = {
       gameData: new Array(136).fill(false),
     };
-    this.toggleBitFactory = this.toggleBitFactory.bind(this);
+    this.resetGameData = this.resetGameData.bind(this);
     this.spliceFactory = this.spliceFactory.bind(this);
+    this.toggleBitFactory = this.toggleBitFactory.bind(this);
   }
 
-  toggleBitFactory(bitIndex) {
-    return () => {
-      const gameData = this.state.gameData;
-      this.setState({
-        gameData: flipBit(gameData, bitIndex),
-      });
-    };
+  resetGameData() {
+    this.setState({
+      gameData: new Array(136).fill(false),
+    });
   }
 
   spliceFactory(start) {
@@ -31,6 +32,15 @@ class App extends React.Component {
     };
   }
 
+  toggleBitFactory(bitIndex) {
+    return () => {
+      const gameData = this.state.gameData;
+      this.setState({
+        gameData: flipBit(gameData, bitIndex),
+      });
+    };
+  }
+
   render() {
     return (
       <div>
@@ -38,11 +48,14 @@ class App extends React.Component {
         <PasswordDisplay
           gameData={this.state.gameData.slice()}
         />
-      <DataModifiers
-        gameData={this.state.gameData.slice()}
-        spliceCallback={this.spliceFactory}
-        toggleCallback={this.toggleBitFactory}
-      />
+        <ResetButton
+          resetCallback={this.resetGameData}
+        />
+        <DataModifiers
+          gameData={this.state.gameData.slice()}
+          spliceCallback={this.spliceFactory}
+          toggleCallback={this.toggleBitFactory}
+        />
       </div>
     );
   }
