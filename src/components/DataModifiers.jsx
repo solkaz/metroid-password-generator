@@ -3,6 +3,7 @@ import OptionToggler from './OptionToggler.jsx';
 import GameTime from './GameTime.jsx';
 import Missiles from './Missiles.jsx';
 import StartLocation from './StartLocation.jsx';
+import { bitsetToNumber } from '../utils.js';
 
 const optionsList = [
   { title: 'Metroid Ball Taken', bitIndex: 0 },
@@ -38,6 +39,7 @@ class DataModifiers extends React.Component {
         />
         <Missiles
           saveMissileCount={this.props.spliceCallback(80)}
+          value={bitsetToNumber((this.props.gameData).slice(80, 88))}
         />
         <GameTime
           saveGameTime={this.props.spliceCallback(88)}
