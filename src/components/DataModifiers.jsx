@@ -43,6 +43,7 @@ class DataModifiers extends React.Component {
         />
         <GameTime
           saveGameTime={this.props.spliceCallback(88)}
+          value={bitsetToNumber((this.props.gameData).slice(88, 120))}
         />
         { optionsToggler }
       </div>
@@ -56,4 +57,4 @@ DataModifiers.propTypes = {
   toggleCallback: PropTypes.func.isRequired,
 };
 
- export default DataModifiers;
+export default DataModifiers;
