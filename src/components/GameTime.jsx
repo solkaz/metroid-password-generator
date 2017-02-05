@@ -1,5 +1,5 @@
 import React from 'react';
-import { numberToBitset, padBitsetLeft, isNumeric } from '../utils.js';
+import { numberToBitset, padBitsetRight, isNumeric } from '../utils.js';
 
 const gameTimeMax = 4294967296;
 
@@ -12,7 +12,7 @@ const GameTime = ({ saveGameTime, value }) => {
     const gameTicksInput = ev.target.value;
     const gameTicks = isValidInput(gameTicksInput) ? Number(gameTicksInput) : value;
     // Convert the value to a 32-bit bitset
-    const gameTicksBitset = padBitsetLeft(numberToBitset(gameTicks), 32);
+    const gameTicksBitset = padBitsetRight(numberToBitset(gameTicks), 32);
     saveGameTime(gameTicksBitset);
   };
 

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { numberToBitset, padBitsetLeft, isNumeric } from '../utils.js';
+import { numberToBitset, padBitsetRight, isNumeric } from '../utils.js';
 
 const missileCountMax = 255;
 
@@ -15,7 +15,7 @@ const Missiles = ({ saveMissileCount, value }) => {
     const missileCount = isValidInput(missileCountInput) ? Number(missileCountInput) : value;
 
     // Convert the value to an 8-bit bitset
-    const missileBitset = padBitsetLeft(numberToBitset(missileCount), 8);
+    const missileBitset = padBitsetRight(numberToBitset(missileCount), 8);
     saveMissileCount(missileBitset);
   };
   return (
@@ -23,7 +23,7 @@ const Missiles = ({ saveMissileCount, value }) => {
       <input
         type="number"
         min={0}
-        max={255}
+        max={missileCountMax}
         value={value}
         onChange={onChange}
       /> Missiles

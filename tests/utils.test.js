@@ -10,13 +10,13 @@ describe('Utils.js', () => {
       const powersOfTwo = [1, 2, 4, 8, 16, 32, 64, 128];
       const powersOfTwoBitsets = [
         [true],
-        [true, false],
-        [true, false, false],
-        [true, false, false, false],
-        [true, false, false, false, false],
-        [true, false, false, false, false, false],
-        [true, false, false, false, false, false, false],
-        [true, false, false, false, false, false, false, false],
+        [false, true],
+        [false, false, true],
+        [false, false, false, true],
+        [false, false, false, false, true],
+        [false, false, false, false, false, true],
+        [false, false, false, false, false, false, true],
+        [false, false, false, false, false, false, false, true],
       ];
       powersOfTwo.map((power, index) => {
         expect(Utils.bitsetToNumber(powersOfTwoBitsets[index])).toEqual(power);
@@ -31,13 +31,13 @@ describe('Utils.js', () => {
       expect(Utils.numberToBitset(1)).toEqual([true]);
     });
     it('should convert 2 to [ true, false]', () => {
-      expect(Utils.numberToBitset(2)).toEqual([true, false]);
+      expect(Utils.numberToBitset(2)).toEqual([false, true]);
     });
-    it('should convert 11 to [true, false, true, true]', () => {
-      expect(Utils.numberToBitset(11)).toEqual([true, false, true, true]);
+    it('should convert 11 to [true, true, false, true]', () => {
+      expect(Utils.numberToBitset(11)).toEqual([true, true, false, true]);
     });
-    it('should convert 125 to [true, true, true, true, true, false, true]', () => {
-      expect(Utils.numberToBitset(125)).toEqual([true, true, true, true, true, false, true]);
+    it('should convert 125 to [true, false, true, true, true, true, true]', () => {
+      expect(Utils.numberToBitset(125)).toEqual([true, false, true, true, true, true, true]);
     });
   });
   describe('makePassword', () => {

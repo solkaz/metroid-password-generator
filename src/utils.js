@@ -6,7 +6,7 @@ export const numberToBitset = (num) => {
     newBitset.push(Boolean(num % 2));
     num = Math.floor(num / 2);
   } while (num > 0);
-  return newBitset.reverse();
+  return newBitset;
 };
 
 export const bitsetToNumber = (bitset) => {
@@ -30,10 +30,7 @@ const makeChecksumByte = (gameData) => {
   const checksumBitset = numberToBitset(checksum);
   // Prepend any necessary zeroes to the bitset to make it
   // the correct length
-  while (checksumBitset.length < byteLength) {
-    checksumBitset.unshift(false);
-  }
-  return checksumBitset;
+  return padBitsetRight(checksumBitset, byteLength);
 };
 
 const shiftPassword = (bitset) => {
@@ -74,7 +71,7 @@ export const translateBitset = (bitset) => {
   const byteLength = 6;
   const numOfBytes = 24;
   for (let byteNum = 0; byteNum < numOfBytes; byteNum++) {
-    password += translateByte(bitset.slice(byteLength * byteNum, byteLength * (byteNum + 1)));
+    password = translateByte(bitset.slice(byteLength * byteNum, byteLength * (byteNum + 1))) + password;
   }
   return password;
 };
@@ -112,11 +109,11 @@ export const spliceBitset = (bitset, start, newBitset) => {
   return bitsetCopy;
 };
 
-export const padBitsetLeft = (bitset, length) => {
+export const padBitsetRight = (bitset, length) => {
   if (bitset.length === length) {
     return bitset;
   }
-  return (Array(length - bitset.length).fill(false)).concat(bitset);
+  return (bitset).concat(Array(length - bitset.length).fill(false));
 };
 
 // http://stackoverflow.com/a/1830844
