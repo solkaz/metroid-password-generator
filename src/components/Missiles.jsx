@@ -4,7 +4,7 @@ import { numberToBitset, padBitsetLeft, isNumeric } from '../utils.js';
 const missileCountMax = 255;
 
 const isValidInput = (val) => {
-  return isNumeric(val) && val < missileCountMax;
+  return isNumeric(val) && val <= missileCountMax;
 };
 
 const Missiles = ({ saveMissileCount, value }) => {
