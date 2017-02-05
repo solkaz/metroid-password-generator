@@ -30,7 +30,7 @@ describe('Utils.js', () => {
     it('should convert 1 to [true]', () => {
       expect(Utils.numberToBitset(1)).toEqual([true]);
     });
-    it('should convert 2 to [ true, false]', () => {
+    it('should convert 2 to [false, true]', () => {
       expect(Utils.numberToBitset(2)).toEqual([false, true]);
     });
     it('should convert 11 to [true, true, false, true]', () => {

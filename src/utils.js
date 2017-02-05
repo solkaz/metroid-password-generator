@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?- ';
 
 export const numberToBitset = (num) => {
@@ -19,9 +21,14 @@ export const bitsetToNumber = (bitset) => {
 };
 
 const calculateChecksum = (bitset) => {
-  return (bitset.reduce((sum, bit) => {
-    return sum + Number(bit);
-  }, 0) & 255);
+  const byteLength = 8;
+  return _.chunk(bitset, byteLength)
+    .map((byte) => {
+      return bitsetToNumber(byte);
+    })
+    .reduce((sum, byteValue) => {
+      return sum + byteValue;
+    }, 0);
 };
 
 const makeChecksumByte = (gameData) => {
