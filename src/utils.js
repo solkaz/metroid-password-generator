@@ -2,6 +2,10 @@ import _ from 'lodash';
 
 const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?- ';
 
+export const makeNewPassword = () => {
+  return _.times(136, _.constant(false));
+};
+
 export const numberToBitset = (num) => {
   let newBitset = [];
   do {
@@ -22,12 +26,11 @@ export const bitsetToNumber = (bitset) => {
 
 const calculateChecksum = (bitset) => {
   const byteLength = 8;
-  return _.chunk(bitset, byteLength)
-    .map((byte) => {
-      return bitsetToNumber(byte);
-    })
-    .reduce((sum, byteValue) => {
-      return sum + byteValue;
+  return _.chunk(bitset, byteLength) // split the game data into 17 8-bit bytes
+    .map(bitsetToNumber) // convert the byte into a Number
+    .reduce((checkSum, byteValue) => {
+      // Add to the checksum
+      return checkSum + byteValue;
     }, 0);
 };
 
@@ -73,14 +76,14 @@ const translateByte = (byte) => {
 };
 
 export const translateBitset = (bitset) => {
-  let password = '';
   // Each character is translated from a 6-bit byt
   const byteLength = 6;
-  const numOfBytes = 24;
-  for (let byteNum = 0; byteNum < numOfBytes; byteNum++) {
-    password = translateByte(bitset.slice(byteLength * byteNum, byteLength * (byteNum + 1))) + password;
-  }
-  return password;
+  return _.chunk(bitset, byteLength) // Make an Array of 24 6-bit bytes
+    .map(translateByte) // Translate each byte into a char
+    .reduce((password, translatedByte) => {
+      // Prepend the translated char to the password
+      return translatedByte + password;
+    }, '');
 };
 
 export const makePassword = (gameData) => {
@@ -94,7 +97,7 @@ export const splitPassword = (password) => {
     password.slice(0, 6),
     password.slice(6, 12),
     password.slice(12, 18),
-    password.slice(18),
+    password.slice(18)
   ];
 };
 
@@ -117,10 +120,10 @@ export const spliceBitset = (bitset, start, newBitset) => {
 };
 
 export const padBitsetRight = (bitset, length) => {
-  if (bitset.length === length) {
+  if (bitset.length === length || bitset.length > length) {
     return bitset;
   }
-  return (bitset).concat(Array(length - bitset.length).fill(false));
+  return (bitset).concat(_.times(length - Array.length, _.constant(false)));
 };
 
 // http://stackoverflow.com/a/1830844

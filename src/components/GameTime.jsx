@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { numberToBitset, padBitsetRight, isNumeric } from '../utils.js';
 
 const gameTimeMax = 4294967296;

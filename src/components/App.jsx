@@ -4,13 +4,13 @@ import DataModifiers from './DataModifiers.jsx';
 import PasswordDisplay from './PasswordDisplay.jsx';
 import ResetButton from './ResetButton.jsx';
 
-import { flipBit, spliceBitset } from '../utils.js';
+import { flipBit, makeNewPassword, spliceBitset } from '../utils.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameData: new Array(136).fill(false),
+      gameData: makeNewPassword(),
     };
     this.resetGameData = this.resetGameData.bind(this);
     this.spliceFactory = this.spliceFactory.bind(this);
@@ -19,7 +19,7 @@ class App extends React.Component {
 
   resetGameData() {
     this.setState({
-      gameData: new Array(136).fill(false),
+      gameData: makeNewPassword(),
     });
   }
 

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import * as Utils from '../src/utils.js';
 
 describe('Utils.js', () => {
@@ -18,9 +20,10 @@ describe('Utils.js', () => {
         [false, false, false, false, false, false, true],
         [false, false, false, false, false, false, false, true],
       ];
-      powersOfTwo.map((power, index) => {
-        expect(Utils.bitsetToNumber(powersOfTwoBitsets[index])).toEqual(power);
-      });
+      _.zip(powersOfTwo, powersOfTwoBitsets)
+        .map(([ powerOfTwo, powersOfTwoBitset ]) => {
+          expect(Utils.bitsetToNumber(powersOfTwoBitset)).toEqual(powerOfTwo);
+        });
     });
   });
   describe('numberToBitset', () => {
@@ -42,7 +45,7 @@ describe('Utils.js', () => {
   });
   describe('makePassword', () => {
     it('should correctly make a password', () => {
-      const bitset = new Array(144).fill(false);
+      const bitset = Utils.makeNewPassword();
       expect(Utils.makePassword(bitset)).toEqual('000000000000000000000000');
     });
   });
