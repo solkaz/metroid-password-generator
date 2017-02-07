@@ -17,11 +17,11 @@ export const numberToBitset = (num) => {
 
 export const bitsetToNumber = (bitset) => {
   // Take a slice of arg to ensure we don't operate on the array itself
-  const reversedBitset = bitset.slice();
-  const sum = reversedBitset.reduce((sum, bit, index) => {
-    return sum + (Number(bit) * Math.pow(2, index));
-  }, 0);
-  return sum;
+  // Additionally, remove any leading zeroes.
+  return _.dropRightWhile(_.slice(bitset), (bit) => !bit)
+    .reduce((sum, bit, index) => {
+      return sum + (Number(bit) * Math.pow(2, index));
+    }, 0);
 };
 
 const calculateChecksum = (bitset) => {

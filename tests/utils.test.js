@@ -25,6 +25,11 @@ describe('Utils.js', () => {
           expect(Utils.bitsetToNumber(powersOfTwoBitset)).toEqual(powerOfTwo);
         });
     });
+    it('should convert values with(out) leading zeroes', () => {
+      const threeBitset = [ true, true ];
+      const threeBitsetPadded = [ true, true, false, false ];
+      expect(Utils.bitsetToNumber(threeBitset)).toEqual(Utils.bitsetToNumber(threeBitsetPadded));
+    });
   });
   describe('numberToBitset', () => {
     it('should convert 0 to [false]', () => {
@@ -84,6 +89,14 @@ describe('Utils.js', () => {
       const toAdd = [true, true];
       const received = Utils.spliceBitset(zeroBitset, 1, toAdd);
       expect(received).toEqual([false, true, true, false]);
+    });
+  });
+  describe('padBitsetRight', () => {
+    it('should pad a bitset to the desired length', () => {
+
+    });
+    it('should NOT modify the value of a bitset', () => {
+      const threeBitset = [ true, true ]
     });
   });
 });
