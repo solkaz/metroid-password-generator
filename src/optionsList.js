@@ -1,3 +1,91 @@
+export const inventorySection = {
+  title: 'Samus\' inventory',
+  modifiers: [
+    {
+      type: 'TOGGLE',
+      props: { title: 'Samus has Bombs', bitIndex: 72 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Samus has High jump boots', bitIndex: 73 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Samus has Long Beam', bitIndex: 74 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Samus has Screw Attack', bitIndex: 75 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Samus has Metroid Ball', bitIndex: 76 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Samus has Varia', bitIndex: 77 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Samus has Wave Beam', bitIndex: 78 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Samus has Ice Beam', bitIndex: 79 },
+    },
+  ]
+};
+
+export const zebetiteSection = {
+  title: 'Zebetites defeated',
+  modifiers: [
+    {
+      type: 'TOGGLE',
+      props: { title: 'Zebetite 1', bitIndex: 53 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Zebetite 2', bitIndex: 54 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Zebetite 3', bitIndex: 55 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Zebetite 4', bitIndex: 56 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Zebetite 5', bitIndex: 57 },
+    },
+  ]
+};
+
+export const bossesDefeatedSection = {
+  title: 'Bosses Defeated',
+  modifiers: [
+    {
+      type: 'TOGGLE',
+      props: { title: 'Kraid', bitIndex: 126 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Ridley', bitIndex: 124 },
+    },
+    {
+      type: 'TOGGLE',
+      props: { title: 'Mother Brain', bitIndex: 58 },
+    }
+  ],
+};
+
+export const modifierSections = [
+  inventorySection,
+  zebetiteSection,
+  bossesDefeatedSection,
+];
+
 const optionsList = [
   { title: 'Metroid Ball Taken', bitIndex: 0 },
   { title: 'Missile Container (Brinstar)', bitIndex: 1 },
