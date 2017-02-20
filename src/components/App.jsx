@@ -1,7 +1,9 @@
 import React from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import DataModifiers from './DataModifiers.jsx';
 import PasswordDisplay from './PasswordDisplay.jsx';
+import RawBitsetViewer from './RawBitsetViewer.jsx';
 import ResetButton from './ResetButton.jsx';
 
 import { flipBit, makeNewPassword, spliceBitset } from '../utils.js';
@@ -51,11 +53,25 @@ class App extends React.Component {
         <ResetButton
           resetCallback={this.resetGameData}
         />
-        <DataModifiers
-          gameData={this.state.gameData.slice()}
-          spliceCallback={this.spliceFactory}
-          toggleCallback={this.toggleBitFactory}
-        />
+        <Tabs>
+          <TabList>
+            <Tab>Paneled</Tab>
+            <Tab>Raw</Tab>
+          </TabList>
+          <TabPanel>
+            <DataModifiers
+              gameData={this.state.gameData.slice()}
+              spliceCallback={this.spliceFactory}
+              toggleCallback={this.toggleBitFactory}
+            />
+          </TabPanel>
+          <TabPanel>
+            <RawBitsetViewer
+              bitset={this.state.gameData.slice()}
+              toggleCallback={this.toggleBitFactory}
+            />
+          </TabPanel>
+        </Tabs>
       </div>
     );
   }

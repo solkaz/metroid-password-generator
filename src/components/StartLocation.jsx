@@ -20,24 +20,24 @@ const getLocationBitset = (location) => {
 const translateLocationBitset = (locationBitset) => {
   const bitsetValue = bitsetToNumber(locationBitset);
   switch (bitsetValue) {
-    default:
-    case 0: {
-      return 'Brinstar';
-    }
-    case 1: {
-      return 'Norfair';
-    }
-    case 2: {
-      return 'KraidsLair';
-    }
-    case 3: {
-      return 'Tourian';
-    }
-    case 4: {
-      return 'RidleysLair';
-    }
+  default:
+  case 0: {
+    return 'Brinstar';
   }
-}
+  case 1: {
+    return 'Norfair';
+  }
+  case 2: {
+    return 'KraidsLair';
+  }
+  case 3: {
+    return 'Tourian';
+  }
+  case 4: {
+    return 'RidleysLair';
+  }
+  }
+};
 
 const StartLocation = ({ locationBitset, saveStartLocation }) => {
   const onChange = (ev) => {
